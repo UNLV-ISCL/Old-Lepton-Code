@@ -12,7 +12,9 @@ KERNEL=="i2c*", GROUP="i2c", MODE="0660"
 
 You'll need to build the Lepton SDK binary in order to issue commands to the lepton over I2C, such as performing flat-field calibration. To do this, cd into LeptonSDKEmb32PUB and run the command: `make`
 
-Once everything's in place, cd into the raspberrypi_video folder, and run the command: `qmake && make`. This will compile the application.
+Once everything's in place, cd into the raspberrypi_video folder, and run:
+`/usr/lib/arm-linux-gnueabihf/qt4/bin/qmake`
+...to build the Makefile, then run `make` to build the project.  This is necessary if you have Qt5 installed; this demo application is very much Qt4.
 
 The application expects two Leptons to be connected. Both devices share the following pins:
 RPi pin header diagram: http://www.element14.com/community/servlet/JiveServlet/previewBody/73950-102-4-309126/GPIO_Pi2.png
