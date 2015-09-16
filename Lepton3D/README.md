@@ -7,8 +7,8 @@ Once I'm finished, it will interface with ROS Indigo, so you'll probably need Ub
 This requires the qt4-dev-tools package among other things.  Yes, it's still QT, like the original demo, but that's just for display/diagnostic purposes.  Eventually we'll move this code to a pure-ROS setup.
 
 To avoid having to run as root, I recommend either making the SPI and I2C interfaces world-accessible or group-accessible, adding the 'ubuntu' user to 'spi' and 'i2c' groups).  You can set up a udev file /etc/udev/rules.d/39-spidev-and-i2c.rules:  
-KERNEL=="spidev*", GROUP="spi", MODE="0660"
-KERNEL=="i2c*", GROUP="i2c", MODE="0660"
+KERNEL=="spidev*", GROUP="spi", MODE="0660"  
+KERNEL=="i2c*", GROUP="i2c", MODE="0660"  
 
 You'll need to build the Lepton SDK binary in order to issue commands to the lepton over I2C, such as performing flat-field calibration. To do this, cd into LeptonSDKEmb32PUB and run the command: `make`
 
@@ -26,6 +26,7 @@ Lepton SCL to RPi SCL1 (pin 05)
 The CS pins of the Leptons are connected to separate pins:  
 "Left eye" Lepton CS to RPi SPI_CE0_N (pin 24)  
 "Right eye" Lepton CS to RPi SPI_CE1_N (pin 26)  
+
 This ensures that we always know which Lepton is which -- Left is CE0 (/dev/spidev0.0), Right is CE1 (/dev/spidev0.1).
 
 Note that both devices use the same I2C bus, and they also share the same device ID.  This makes reading data from the devices probably impossible, but allows settings and commands to be sent to both devices simultaneously and simplifies wiring.  In the future we may set up a separate I2C bus using WiringPi or some other GPIO approach.
