@@ -25,6 +25,7 @@ public:
   void Open(int spiPort);
   void Close();
   bool Poll();
+  bool FrameBufferReady;
 
   QImage Image;
   uint16_t FrameBuffer[FRAME_SIZE_UINT16];

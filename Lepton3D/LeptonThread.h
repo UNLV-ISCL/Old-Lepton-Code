@@ -13,6 +13,8 @@
 #include <highgui.hpp>
 #include <calib3d.hpp>
 
+#include <libconfig.h++>
+
 #include "Lepton_I2C.h"
 #include "SPIReader.h"
 
@@ -38,7 +40,8 @@ signals:
 
 protected:
   SPIReader left, right;
-  cv::Mat leftImage, rightImage;
+  cv::Mat leftImage, rightImage, disparityOutput;
+  QImage disparityImage;
   void generateDepthMap();
   
 private:

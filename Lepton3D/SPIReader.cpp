@@ -8,6 +8,7 @@ SPIReader::SPIReader() {
   is_big_endian = (htonl(42) == 42);
   
   Image = QImage(80, 60, QImage::Format_RGB888);
+  FrameBufferReady = false;
 }
 
 SPIReader::~SPIReader() {
@@ -110,6 +111,10 @@ void SPIReader::OnFrameComplete() {
     if (value < minValue) minValue = value;
   }
 
+  // Indicate that we now have a valid frame.
+  FrameBufferReady = true;
+
+  // Load the QImage "Image" with pixels for debug display.
   float diff = maxValue - minValue;
   float scale = 255/diff;
   QRgb color;
