@@ -1,7 +1,5 @@
 *.o
 moc_*
-*.pro
-Makefile
 !leptonSDKEmb32PUB/Makefile
 .DS_Store
 leptonSDKEmb32PUB/Debug

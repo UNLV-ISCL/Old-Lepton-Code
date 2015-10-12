@@ -43,9 +43,19 @@ void LeptonThread::generateDepthMap() {
   // normalize(rightImage, r, 0, 255, CV_MINMAX, CV_8UC1);
   
   // cv::StereoSGBM sbm = cv::StereoSGBM();
+  // sbm.minDisparity = 0;
   // sbm.numberOfDisparities = 16;
+  // sbm.SADWindowSize = 5;
+  // sbm.preFilterCap = 10;
+  // sbm.uniquenessRatio = 10;
+  // sbm.P1 = 0;
+  // sbm.P2 = 0;
+  // sbm.speckleWindowSize = 0;
+  // sbm.speckleRange = 0;
+  // sbm.disp12MaxDiff = 0;
+  // sbm.fullDP = false;
 
-  cv::StereoBM sbm = cv::StereoBM(cv::StereoBM::BASIC_PRESET, 32, 7);
+  cv::StereoBM sbm = cv::StereoBM(cv::StereoBM::FISH_EYE_PRESET, 16, 7);
 
   cv::Mat disparityMap = cv::Mat(ROWS_PER_FRAME, ROW_SIZE_UINT16, CV_16UC1);
   sbm(l, r, disparityMap); // CV_16SC1

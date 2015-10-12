@@ -38,6 +38,7 @@ bool SPIReader::Poll() {
   if (rawdata[row*PACKET_SIZE+1] != row) {
     row = 0;
     resets += 1;
+    usleep(10);
 
     // If there are a LOT of resets, time out the VoSPI protocol, we're way out of sync.
     // At 20Mbit/s, 750 frames * 164 bytes/frame = 49ms... the device should provide a new frame very 37ms.
@@ -73,7 +74,7 @@ bool SPIReader::Poll() {
 // Updates QImage Image with the new frame image data.
 void SPIReader::OnFrameComplete() {
   // Debug: Report excessive numbers of resets for a particular frame:
-  if (resets >= 250 || restarts > 0) {
+  if (resets >= 150 || restarts > 0) {
     qDebug() << "Completed frame CS=" << _spiPort << " had excessive resets: " << resets << " restarts: " << restarts;
   }
 
